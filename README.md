@@ -123,6 +123,8 @@ python3 ytmusic_downloader.py "https://music.youtube.com/playlist?list=PLQNp-BCx
 - At the end, a summary is displayed with: total songs, downloaded this run, already in folder, skipped (no video found).  
 
 ---
+If you have any issue or comments, please leave a comment, i will try to resolve it as soon as possible.
+---
 
 ## License
 
