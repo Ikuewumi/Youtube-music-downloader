@@ -41,7 +41,8 @@ def download_playlist(playlist_url: str, base_dir="DownloadedMusic"):
     # Loop through every song in the playlist
     for idx, track in enumerate(tracks, start=1):
         song_title = sanitize_name(track['title'])
-        file_path = os.path.join(playlist_folder, f"{idx:02d} - {song_title}.mp3")
+        song_file_name = f"{str(idx).zfill(2)} - {song_title}.mp3"
+        file_path = os.path.join(playlist_folder, song_file_name)
 
         # ✅ Skip if file already exists
         if os.path.exists(file_path):
@@ -63,13 +64,13 @@ def download_playlist(playlist_url: str, base_dir="DownloadedMusic"):
         # yt-dlp command → best audio, convert to MP3, embed metadata + thumbnail
         command_download = [
             "yt-dlp",
+            "-o", os.path.join(playlist_folder, f"{str(idx).zfill(2)} - %(title)s.%(ext)s"), # Save as song title
             "-f", "bestaudio",
             "--extract-audio",
             "--audio-format", "mp3",
             "--add-metadata",
             "--embed-metadata",
             "--embed-thumbnail",
-            "-o", os.path.join(playlist_folder, "%(playlist_index)02d - %(title)s.%(ext)s"),  # Save as song title
             video_url
         ]
 
