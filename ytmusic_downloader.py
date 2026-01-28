@@ -41,7 +41,7 @@ def download_playlist(playlist_url: str, base_dir="DownloadedMusic"):
     # Loop through every song in the playlist
     for idx, track in enumerate(tracks, start=1):
         song_title = sanitize_name(track['title'])
-        file_path = os.path.join(playlist_folder, f"{song_title}.mp3")
+        file_path = os.path.join(playlist_folder, f"{idx:02d} - {song_title}.mp3")
 
         # ✅ Skip if file already exists
         if os.path.exists(file_path):
@@ -69,7 +69,7 @@ def download_playlist(playlist_url: str, base_dir="DownloadedMusic"):
             "--add-metadata",
             "--embed-metadata",
             "--embed-thumbnail",
-            "-o", os.path.join(playlist_folder, "%(title)s.%(ext)s"),  # Save as song title
+            "-o", os.path.join(playlist_folder, "%(playlist_index)02d - %(title)s.%(ext)s"),  # Save as song title
             video_url
         ]
 
